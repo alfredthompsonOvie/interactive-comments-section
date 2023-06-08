@@ -1,6 +1,6 @@
 <template>
   <form>
-    <section></section>
+    <label for="c"></label>
     <textarea 
     name="comment" 
     id="comment" 
