@@ -41,7 +41,11 @@
 				</button>
 			</div>
 			<div v-else class="btn--replyWrapper">
-				<button type="button" class="btn btn--reply">
+				<button 
+				type="button" 
+				class="btn btn--reply"
+				@click.prevent="showTextArea"
+				>
 					<img src="@/assets/images/icon-reply.svg" alt="" />
 					<span> reply </span>
 				</button>
@@ -61,12 +65,17 @@ const props = defineProps({
 	},
 });
 
+const emit = defineEmits(['showTextArea'])
+
 const currentUser = computed(() => data.currentUser.username);
 
 
 
 function getImageUrl(name) {
 	return new URL(`/src/assets/${name}`, import.meta.url).href;
+}
+const showTextArea = () => {
+	emit('showTextArea')
 }
 </script>
 

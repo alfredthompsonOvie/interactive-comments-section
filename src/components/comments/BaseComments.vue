@@ -5,7 +5,7 @@
 		:key="comment.id"
 	>
 
-		<BaseComment :comment="comment" />
+		<BaseComment :comment="comment" @show-text-area="showTextArea = !showTextArea"/>
 
 		<!-- <section class="replyContainer">
 			<section class="replyContainerContnents">
@@ -25,22 +25,28 @@
 		</ul>
 
     <!-- v-if="showAddComment" -->
-		<section class="textArea">
-			<form>
-				<section class="form__control">
-					<label for="addComment"></label>
-					<textarea
-						name="addComment"
-						id="addComment"
-						cols="30"
-						rows="10"
-						placeholder="Add a comment..."
-					></textarea>
-				</section>
-				<img :src="``" alt="" />
-				<button type="submit" class="submit">Send</button>
-			</form>
-		</section>
+		<section 
+		class="formContainer"
+		v-if="showTextArea"
+		>
+		<transition name="fade" appear>
+				<form class="form">
+					<section class="form__control">
+						<label for="addComment"></label>
+						<textarea
+							name="addComment"
+							id="addComment"
+							cols="30"
+							rows="5"
+							placeholder="Add a comment..."
+						></textarea>
+					</section>
+					<img :src="`${getImageUrl(currentUser)}`" alt="" class="avatar"/>
+					<button type="submit" class="submit">Send</button>
+				</form>
+			</transition>
+			</section>
+		
 	</section>
 
 
@@ -59,8 +65,9 @@ import DeleteCommentModal from "@/components/DeleteCommentModal.vue"
 const comments = computed(() => data.comments);
 // const score = ref(data.comment.score);
 // const reply = ref(true);
-// const currentUser = ref("juliusomo");
+const currentUser = computed(()=> data.currentUser.image.png);
 // const showAddComment = ref(false);
+const showTextArea = ref(true);
 const showModal = ref(false);
 
 const replies = computed(() => data.comment.replies);
@@ -75,5 +82,11 @@ function getImageUrl(name) {
 </script>
 
 <style scoped>
-
+.fade-enter-from, .fade-leave-to {
+	opacity: 0;
+	transform: translateY(10px);
+}
+.fade-enter-active, .fade-leave-active {
+	transition: all .3s linear;
+}
 </style>

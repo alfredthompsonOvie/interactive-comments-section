@@ -1,5 +1,7 @@
 <template>
-  <BaseComments />
+	<section class="commentsWrapper">
+		<BaseComments />
+	</section>
 	<!-- <section
 		class="commentsContainer"
 		v-for="comment in comments"
@@ -51,4 +53,10 @@ import BaseComments from "./components/comments/BaseComments.vue";
 // const showModal = ref(false);
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.commentsWrapper {
+	max-width: 600px;
+	width: 100%;
+	margin-inline: auto;
+}
+</style>
